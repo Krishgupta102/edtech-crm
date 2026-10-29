@@ -1,0 +1,17 @@
+{
+  "name": "edtech-crm-inquiry-system",
+  "private": true,
+  "workspaces": ["apps/api", "apps/web"],
+  "scripts": {
+    "dev": "concurrently -k -n API,WEB -c blue,magenta \"npm:dev:api\" \"npm:dev:web\"",
+    "dev:api": "npm --workspace @edtech-crm/api run dev",
+    "dev:web": "npm --workspace @edtech-crm/web run dev",
+    "build": "npm --workspace @edtech-crm/api run build && npm --workspace @edtech-crm/web run build",
+    "test": "npm --workspace @edtech-crm/api test",
+    "start": "concurrently -k -n API,WEB \"npm: start:api\" \"npm: start:web\"",
+    "start:api": "npm --workspace @edtech-crm/api start",
+    "start:web": "npm --workspace @edtech-crm/web start",
+    "admin:create": "npm --workspace @edtech-crm/api run admin:create"
+  },
+  "devDependencies": { "concurrently": "^9.1.2" }
+}
