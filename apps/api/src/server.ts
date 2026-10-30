@@ -18,7 +18,14 @@ const pool = new Pool({ connectionString: process.env.DATABASE_URL, ssl: process
 const app = express();
 app.set('trust proxy', 1);
 app.use(helmet());
-app.use(cors({ origin: process.env.WEB_ORIGIN, credentials: true }));
+
+const webOrigin = process.env.WEB_ORIGIN!.replace(/\/+$/, '');
+
+app.use(cors({
+  origin: webOrigin,
+  credentials: true
+}));
+
 app.use(express.json({ limit: '20kb' }));
 app.use(cookieParser());
 
